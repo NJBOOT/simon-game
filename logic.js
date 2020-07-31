@@ -5,7 +5,7 @@ $(document).ready(function () {
     let gamePattern = []
 
     let userClickedPattern = []
-    
+
     let level = 0
 
     let started = false
@@ -13,10 +13,10 @@ $(document).ready(function () {
     $(document).on("keydown", function () {
 
         if (!started) {
-        $("#level-title").text("Level " + level);
-        nextSequence();
-        started = true;
-            }
+            $("#level-title").text("Level " + level);
+            nextSequence();
+            started = true;
+        }
     })
 
     $(".btn").on("click", function () {
@@ -34,19 +34,19 @@ $(document).ready(function () {
     })
 
 
-    function playSound (name) {
+    function playSound(name) {
 
         let audio = new Audio("sounds/" + name + ".mp3")
-        
+
         audio.play()
     }
 
-    function animatePress (currentColor) {
+    function animatePress(currentColor) {
         $("#" + currentColor).addClass("pressed")
 
-        setTimeout(function (){
+        setTimeout(function () {
             $("#" + currentColor).removeClass("pressed")
-        }, 100) 
+        }, 100)
     }
 
     function nextSequence() {
@@ -54,7 +54,7 @@ $(document).ready(function () {
         userClickedPattern = []
 
         level++;
-        
+
         $("#level-title").text("Level " + level)
 
         let randomNumber = Math.floor(Math.random() * 4)
@@ -68,30 +68,30 @@ $(document).ready(function () {
         playSound(randomChosenColor);
     }
 
-    function wrongAnswer () {
+    function wrongAnswer() {
         wrongSound = new Audio("sounds/wrong.mp3");
         wrongSound.play;
         $("body").addClass("game-over");
-        setTimeout(function(){
+        setTimeout(function () {
             $("body").removeClass("game-over");
         }, 200);
         $("#level-title").text("Game Over, Press Any Key to Restart");
     }
 
-   function resetGame () {
-       level = 0;
-       started = false;
-       gamePattern = [];
-   } 
-    function checkAnswer (currentLevel) {
-    
+    function resetGame() {
+        level = 0;
+        started = false;
+        gamePattern = [];
+    }
+    function checkAnswer(currentLevel) {
+
         if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
-            if (gamePattern.length === userClickedPattern.length){
-                setTimeout(function (){
+            if (gamePattern.length === userClickedPattern.length) {
+                setTimeout(function () {
                     nextSequence();
                 }, 1000)
             }
-        
+
         } else {
             wrongAnswer();
             resetGame();
